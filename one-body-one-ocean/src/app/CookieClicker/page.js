@@ -310,7 +310,7 @@ const getBackgroundColor = () => {
     <div className="flex flex-col min-h-screen text-white" style={getBackgroundColor()}>
       <div className="absolute top-4 right-4">
       <div className="flex justify-center items-center mt-10">
-        <Link href="/credits">
+        <Link href="/">
           <div
           onClick={() => handleHome()}
             className="relative inline-block px-8 py-4 font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 rounded-full shadow-lg hover:from-indigo-600 hover:to-sky-500 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition duration-300 ease-in-out"
