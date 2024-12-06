@@ -7,7 +7,7 @@ import Waste from "../components/Waste"
 import FishDead from "../components/FishDead"
 import Image from 'next/image';
 
-export default function app() {
+export default function App() {
   const [background, setBackground] = useState('rgba(0, 122, 255, 1)'); // Bleu initial
   const [scrollPosition, setScrollPosition] = useState(0);
   const router = useRouter(); // Initialiser le routeur
