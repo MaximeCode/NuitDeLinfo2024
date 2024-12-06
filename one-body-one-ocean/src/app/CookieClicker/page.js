@@ -23,6 +23,10 @@ export default function FishClicker() {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
     11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
   ];
+  const [buttonPositions, setButtonPositions] = useState([
+    { id: 1, top: 0, left: 0 },
+    { id: 2, top: 0, left: 100 },
+  ]);
   
 
  
@@ -195,14 +199,30 @@ const getBackgroundColor = () => {
     return () => clearInterval(interval); // Nettoyage
   }, [fishPosition]); // Dépend de fishPosition
   
+  useEffect(() => {
+    const interval = setInterval(() => {
+      moveButtons();
+    }, 2000); // Déplace les boutons toutes les 2 secondes
+    return () => clearInterval(interval);
+  }, []);
   
+
+
+
+  const moveButtons = () => {
+    const buttonWidth = 150; // Largeur estimée du bouton
+    const screenRightStart = window.innerWidth / 2; // Début de la moitié droite
+    const screenRightEnd = window.innerWidth - buttonWidth; // Fin de la moitié droite
   
+    setButtonPositions((prevPositions) =>
+      prevPositions.map((pos) => {
+        const newTop = Math.random() * (window.innerHeight - 50); // Évite de dépasser en hauteur
+        const newLeft = Math.random() * (screenRightEnd - screenRightStart) + screenRightStart; // Positionne dans la moitié droite
   
-  
-  
-  
-  
-  
+        return { ...pos, top: newTop, left: newLeft };
+      })
+    );
+  };
   
   
   
@@ -315,21 +335,29 @@ const getBackgroundColor = () => {
         <div className="flex flex-col items-center justify-center w-1/2">
           <h2 className="text-3xl font-bold">Améliorations</h2>
           <div className="flex flex-col space-y-2">
-            <button
-              onClick={handleClickUpgrade}
-              className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
-            >
-              Nourrir les poissons (améliore les clics) [{clickUpgradeCost} poissons]
-            </button>
-            <button
-              onClick={handleAutoClickerPurchase}
-              className={`bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded ${
-                autoClickers >= 10 ? 'disabled-button' : ''
-              }`}
-              disabled={autoClickers >= 10} // Désactiver le bouton si 10 autoclickers sont déjà achetés
-            >
-              {autoClickers >= 10 ? 'Trop de pêcheurs' : `Acheter un pêcheur [${autoClickerCost} poissons]`}
-            </button>
+          <button
+            onClick={handleClickUpgrade}
+            className="absolute bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+            style={{
+              top: `${buttonPositions[0].top}px`,
+              left: `${buttonPositions[0].left}px`,
+            }}
+          >
+            Nourrir les poissons (améliore les clics) [{clickUpgradeCost} poissons]
+          </button>
+          <button
+            onClick={handleAutoClickerPurchase}
+            className={`absolute bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded ${
+              autoClickers >= 10 ? 'disabled-button' : ''
+            }`}
+            disabled={autoClickers >= 10}
+            style={{
+              top: `${buttonPositions[1].top}px`,
+              left: `${buttonPositions[1].left}px`,
+            }}
+          >
+            {autoClickers >= 10 ? 'Trop de pêcheurs' : `Acheter un pêcheur [${autoClickerCost} poissons]`}
+          </button>
           </div>
         </div>
       </div>
