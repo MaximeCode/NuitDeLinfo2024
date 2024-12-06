@@ -2,8 +2,11 @@
 import { useState, useEffect } from "react";
 import './style.css'; // Assurez-vous que le chemin est correct
 import { increaseCookies, purchaseUpgrade, handleFishEvents } from './cookieFunction'; // Importez vos fonctions
+import { checkAdPopup } from './adPopup';
+
 
 export default function FishClicker() {
+  const [fishCount, setFishCount] = useState(0);
   const [cookies, setCookies] = useState(0);
   const [fishPosition, setFishPosition] = useState({ left: 100, top: 100 });
   const [clickMultiplier, setClickMultiplier] = useState(1);
@@ -19,6 +22,8 @@ export default function FishClicker() {
   const [clickUpgradesPurchased, setClickUpgradesPurchased] = useState(0);
   const [isFishDead, setIsFishDead] = useState(false);
   const [upgradeCount, setUpgradeCount] = useState(0); // Ajout de l'état upgradeCount
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   const clickMultipliers = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
     11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
@@ -32,34 +37,43 @@ export default function FishClicker() {
  
 
   // Gestion des clics sur le poisson
-  const handleClick = (event) => {
-    if (isClickInsideFish(event.clientX, event.clientY)) {
+// Gestion des clics sur le poisson
+const handleClick = (event) => {
+  // Utilise setFishCount pour incrémenter fishCount
+  setFishCount((prevCount) => {
+      const newCount = prevCount + 1;
+      checkAdPopup(newCount); // Passe le nouveau count à checkAdPopup
+      return newCount; // Retourne le nouveau count
+  });
+
+  if (isClickInsideFish(event.clientX, event.clientY)) {
       increaseCookies(cookies, setCookies, clickMultiplier);
-  
+
       setClickCount((prevCount) => {
-        const newCount = prevCount + 1;
-  
-        // Vérifiez si le compteur de clics a atteint 5
-        if (newCount >= 5) {
-          moveFishAwayFromMouse(event.clientX, event.clientY, true);
-          setFishJump(true); // Indique que le poisson doit sauter
-          setTimeout(() => setFishJump(false), 300); // Réinitialise après 0.3 secondes
-          return 0; // Réinitialiser le compteur
-        }
-  
-        if (clickTimeout) {
-          clearTimeout(clickTimeout);
-        }
-  
-        const timeoutId = setTimeout(() => {
-          setClickCount(0);
-        }, 1000);
-        setClickTimeout(timeoutId);
-  
-        return newCount;
+          const newCount = prevCount + 1;
+
+          // Vérifiez si le compteur de clics a atteint 5
+          if (newCount >= 5) {
+              moveFishAwayFromMouse(event.clientX, event.clientY, true);
+              setFishJump(true); // Indique que le poisson doit sauter
+              setTimeout(() => setFishJump(false), 300); // Réinitialise après 0.3 secondes
+              return 0; // Réinitialiser le compteur
+          }
+
+          if (clickTimeout) {
+              clearTimeout(clickTimeout);
+          }
+
+          const timeoutId = setTimeout(() => {
+              setClickCount(0);
+          }, 1000);
+          setClickTimeout(timeoutId);
+
+          return newCount;
       });
-    }
-  };
+  }
+};
+
   
 
 
@@ -190,7 +204,8 @@ const getBackgroundColor = () => {
         })
       );
     };
-  
+
+
     const interval = setInterval(updateHooks, 1000); // Met à jour toutes les secondes
   
     // Mettre à jour immédiatement lorsque le poisson bouge
@@ -206,6 +221,10 @@ const getBackgroundColor = () => {
     return () => clearInterval(interval);
   }, []);
   
+  useEffect(() => {
+    setFishCount((prevCount) => prevCount + 1); // Incrémente fishCount chaque fois que le composant se monte
+  }, []);
+
 
 
 
@@ -284,6 +303,14 @@ const getBackgroundColor = () => {
   // Rendu principal
   return (
     <div className="flex flex-col min-h-screen text-white" style={getBackgroundColor()}>
+      <div className="absolute top-4 right-4">
+        <button
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          className={`bg-${isDarkMode ? 'white' : 'black'} text-${isDarkMode ? 'black' : 'white'} font-bold py-2 px-4 rounded`}
+        >
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
+      </div>
       <div className="flex flex-col items-start justify-center h-20 p-4">
         <h1 className="text-4xl font-bold text-pink-500 drop-shadow-lg">Fish Clicker</h1>
         <p className="text-2xl">
@@ -331,13 +358,23 @@ const getBackgroundColor = () => {
         </div>
   
         <div className="w-1 border-l border-gray-700" />
+
+        <div id="ad-popup" className="hidden">
+          <div className="popup-content">
+            <span id="popup-close" className="close">&times;</span>
+            <p id="popup-message"></p>
+          </div>
+        </div>
+
   
         <div className="flex flex-col items-center justify-center w-1/2">
           <h2 className="text-3xl font-bold">Améliorations</h2>
           <div className="flex flex-col space-y-2">
           <button
             onClick={handleClickUpgrade}
-            className="absolute bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+            className={`absolute ${
+              isDarkMode ? 'bg-pink-500 text-white hover:bg-pink-600' : 'bg-yellow-500 hover:bg-yellow-600 text-white'
+            } font-bold py-2 px-4 rounded`}
             style={{
               top: `${buttonPositions[0].top}px`,
               left: `${buttonPositions[0].left}px`,
@@ -345,11 +382,12 @@ const getBackgroundColor = () => {
           >
             Nourrir les poissons (améliore les clics) [{clickUpgradeCost} poissons]
           </button>
+
           <button
             onClick={handleAutoClickerPurchase}
-            className={`absolute bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded ${
-              autoClickers >= 10 ? 'disabled-button' : ''
-            }`}
+            className={`absolute ${
+              isDarkMode ? 'bg-teal-500 text-white hover:bg-teal-600' : 'bg-green-500 hover:bg-green-600 text-white'
+            } font-bold py-2 px-4 rounded ${autoClickers >= 10 ? 'disabled-button' : ''}`}
             disabled={autoClickers >= 10}
             style={{
               top: `${buttonPositions[1].top}px`,
@@ -358,6 +396,7 @@ const getBackgroundColor = () => {
           >
             {autoClickers >= 10 ? 'Trop de pêcheurs' : `Acheter un pêcheur [${autoClickerCost} poissons]`}
           </button>
+
           </div>
         </div>
       </div>
@@ -376,6 +415,34 @@ const getBackgroundColor = () => {
           </div>
         </div>
       )}
+      <button
+        onClick={() => setShowRules(true)}
+        className="fixed bottom-2 left-2 bg-blue-500 text-white hover:bg-blue-600 font-bold py-1 px-3 rounded-full"
+      >
+        ?
+      </button>
+      {showRules && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-black max-w-sm">
+            <h2 className="text-xl font-bold mb-4">Règles du jeu</h2>
+            <ul className="list-disc pl-5">
+              <li>Cliquez sur le poisson pour en gagner.</li>
+              <li>Achetez des pêcheurs pour qu'ils pêchent pour vous.</li>
+              <li>Nourrissez le poisson pour en gagner plus à chaque fois</li>
+              <li>Cette nourriture n'est peut-être pas très bonne pour le poisson...</li>
+            </ul>
+            <button
+              onClick={() => setShowRules(false)}
+              className="mt-4 bg-red-500 text-white hover:bg-red-600 font-bold py-2 px-4 rounded"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
+
+      
+
     </div>
   );
   
