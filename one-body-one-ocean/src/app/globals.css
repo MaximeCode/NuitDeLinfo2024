@@ -2,20 +2,103 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  .font-outline-1{
+    -webkit-text-stroke: 1px #075985;
+  }
+  .font-outline-2 {
+    -webkit-text-stroke: 2px #075985;
+  }
+  .font-outline-4 {
+    -webkit-text-stroke: 4px #075985;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Bubbles Background */
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Pour ne pas interférer avec d'autres éléments */
+}
+
+.bubbles::before,
+.bubbles::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  opacity: 0.7;
+  animation: float 10s infinite;
+  animation-timing-function: linear;
+}
+
+.bubbles::before {
+  width: 60px;
+  height: 60px;
+  bottom: -50px;
+  left: 20%;
+  animation-duration: 12s;
+  animation-delay: 0s;
+}
+
+.bubbles::after {
+  width: 100px;
+  height: 100px;
+  bottom: -80px;
+  left: 50%;
+  animation-duration: 15s;
+  animation-delay: 3s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100vh); /* Fait remonter les bulles hors de la vue */
+  }
+}
+
+/* Ajoute quelques bulles supplémentaires avec des tailles et vitesses différentes */
+.bubbles div {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  animation: float 10s infinite;
+  pointer-events: none;
+}
+
+.bubbles div:nth-child(1) {
+  width: 80px;
+  height: 80px;
+  left: 15%;
+  animation-duration: 14s;
+  animation-delay: 2s;
+}
+
+.bubbles div:nth-child(2) {
+  width: 50px;
+  height: 50px;
+  left: 30%;
+  animation-duration: 12s;
+  animation-delay: 1s;
+}
+
+.bubbles div:nth-child(3) {
+  width: 90px;
+  height: 90px;
+  left: 45%;
+  animation-duration: 16s;
+  animation-delay: 3s;
+}
+
+.bubbles div:nth-child(4) {
+  width: 40px;
+  height: 40px;
+  left: 70%;
+  animation-duration: 18s;
+  animation-delay: 5s;
 }
