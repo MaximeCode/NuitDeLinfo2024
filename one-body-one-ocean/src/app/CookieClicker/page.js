@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import './style.css'; // Assurez-vous que le chemin est correct
 import { increaseCookies, purchaseUpgrade, handleFishEvents } from './cookieFunction'; // Importez vos fonctions
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { checkAdPopup } from './adPopup';
 
 
@@ -32,8 +34,11 @@ export default function FishClicker() {
     { id: 1, top: 0, left: 0 },
     { id: 2, top: 0, left: 100 },
   ]);
-  
+  const router = useRouter(); // Initialiser le routeur
 
+  const handleHome = () => {
+    router.push('/'); // Rediriger vers /
+  };
  
 
   // Gestion des clics sur le poisson
@@ -304,6 +309,17 @@ const getBackgroundColor = () => {
   return (
     <div className="flex flex-col min-h-screen text-white" style={getBackgroundColor()}>
       <div className="absolute top-4 right-4">
+      <div className="flex justify-center items-center mt-10">
+        <Link href="/credits">
+          <div
+          onClick={() => handleHome()}
+            className="relative inline-block px-8 py-4 font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 rounded-full shadow-lg hover:from-indigo-600 hover:to-sky-500 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition duration-300 ease-in-out"
+          >
+            <span className="absolute inset-0 transition-transform duration-300 transform -translate-x-1 -translate-y-1 bg-indigo-700 rounded-full hover:translate-x-0 hover:translate-y-0"></span>
+            <span className="relative">Page d'accueil</span>
+          </div>
+        </Link>
+      </div>
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
           className={`bg-${isDarkMode ? 'white' : 'black'} text-${isDarkMode ? 'black' : 'white'} font-bold py-2 px-4 rounded`}
