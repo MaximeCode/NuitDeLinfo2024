@@ -1,15 +1,13 @@
-'use client';
+"use client"
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { Bar } from 'react-chartjs-2';
+import Image from 'next/image';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import "./style.css";
 
-// Enregistrement des composants nécessaires
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-// Liste des contributeurs
 const contributors = [
   {
     name: "Baptiste Vidal",
@@ -37,9 +35,17 @@ const contributors = [
   },
 ];
 
+// Définition d'un type avec les clés spécifiques (pour les contributeurs existants)
+interface ContributionCounts {
+  LeBaptouBaptiste: number;
+  MaximeCode: number;
+  NoaKorogu: number;
+  KAN3KO: number;
+}
+
 export default function CreditPage() {
   const [theme, setTheme] = useState('light');
-  const [contributionCounts, setContributionCounts] = useState({
+  const [contributionCounts, setContributionCounts] = useState<ContributionCounts>({
     LeBaptouBaptiste: 0,
     MaximeCode: 0,
     NoaKorogu: 0,
@@ -50,11 +56,15 @@ export default function CreditPage() {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
-  // Fonction pour récupérer les contributions depuis l'API GitHub
   const fetchContributions = async () => {
     const repo = 'votreNomUtilisateur/votreRepo'; // Remplacez par votre repo GitHub
-    const result = {};
-  
+    const result: ContributionCounts = {
+      LeBaptouBaptiste: 0,
+      MaximeCode: 0,
+      NoaKorogu: 0,
+      KAN3KO: 0,
+    };
+
     try {
       const response = await fetch(`https://api.github.com/repos/${repo}/contributors`, {
         method: 'GET',
@@ -63,34 +73,32 @@ export default function CreditPage() {
           'Accept': 'application/vnd.github.v3+json',
         },
       });
-  
+
       if (!response.ok) {
         throw new Error(`Erreur API : ${response.status} ${response.statusText}`);
       }
-  
+
       const data = await response.json();
-  
       console.log('Réponse de l\'API GitHub:', data);
-  
+
       if (Array.isArray(data)) {
         for (let contributor of contributors) {
           const contributorData = data.find(user => user.login === contributor.github);
-          result[contributor.github] = contributorData ? contributorData.contributions : 0;
+          result[contributor.github as keyof ContributionCounts] = contributorData ? contributorData.contributions : 0;
         }
       } else {
         console.error('La réponse de l\'API GitHub n\'est pas un tableau', data);
       }
-  
+
     } catch (error) {
       console.error('Erreur lors de la récupération des données GitHub:', error);
     }
-  
-    setContributionCounts(result); // Met à jour l'état avec les contributions
-  };  
 
-  // Récupérer les contributions quand le composant est monté
+    setContributionCounts(result); // Met à jour l'état avec les contributions
+  };
+
   useEffect(() => {
-    fetchContributions();
+    fetchContributions(); // Appeler la fonction fetch lors du montage du composant
   }, []);
 
   // Préparer les données pour le graphique
@@ -99,7 +107,12 @@ export default function CreditPage() {
     datasets: [
       {
         label: 'Nombre de contributions',
-        data: contributors.map((contributor) => contributionCounts[contributor.github]),
+        data: [
+          contributionCounts.LeBaptouBaptiste,
+          contributionCounts.MaximeCode,
+          contributionCounts.NoaKorogu,
+          contributionCounts.KAN3KO,
+        ],
         backgroundColor: [
           'rgba(75, 192, 192, 0.2)',
           'rgba(54, 162, 235, 0.2)',
