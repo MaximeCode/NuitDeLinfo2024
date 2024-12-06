@@ -18,7 +18,7 @@ let survivalTime = 0;
 let pipesPassed = 0;
 
 const fishImage = new Image();
-fishImage.src = "/images/NormalOceanFish.png";
+fishImage.src = "/images/PixelFish.png";
 
 // Fonction pour dessiner le poisson
 function drawFish() {

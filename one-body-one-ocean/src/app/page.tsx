@@ -1,13 +1,20 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import HumanBodyNavbar from "../components/Navbar";
 import Wreck from "../components/Wreck";
 import Waste from "../components/Waste"
 import FishDead from "../components/FishDead"
+import Image from 'next/image';
 
 export default function app() {
   const [background, setBackground] = useState('rgba(0, 122, 255, 1)'); // Bleu initial
   const [scrollPosition, setScrollPosition] = useState(0);
+  const router = useRouter(); // Initialiser le routeur
+
+  const handleGame = () => {
+    router.push('/captcha-game'); // Rediriger vers /quiz
+  };
 
   const anchorScrollFactor = 0.33; // Facteur de ralentissement de l'ancre (ajuster ce nombre pour ralentir ou accélérer)
 
@@ -47,6 +54,19 @@ export default function app() {
       <HumanBodyNavbar />
       <Wreck />
       <Waste />
+      <div
+          onClick={() => handleGame()}
+          className="absolute top-[20] left-[360px] w-11 h-11 cursor-pointer hover:scale-150 hover:-rotate-6 transform transition-all duration-300 ease-in-out"
+          title="Cœur"
+        >
+          <Image
+            src="/images/PixelFish.png"
+            alt="fish"
+            width={40}
+            height={40}
+            className="cursor-pointer"
+          />
+        </div>
       <FishDead />
       {/* Conteneur de l'ancre et de la chaîne */}
       <div
