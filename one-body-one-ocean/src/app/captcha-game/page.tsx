@@ -1,8 +1,14 @@
 "use client";
 
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const CaptchaGame: React.FC = () => {
+  const router = useRouter(); // Initialiser le routeur
+
+  const handleGame = () => {
+    router.push('/CookieClicker'); // Rediriger vers /quiz
+  };
   useEffect(() => {
     const checkbox = document.getElementById('checkbox') as HTMLInputElement;
     const gameCanvas = document.getElementById('gameCanvas') as HTMLCanvasElement;
@@ -119,6 +125,9 @@ const CaptchaGame: React.FC = () => {
         captchaText.innerHTML = 'Vous n\'êtes pas un robot'; // Remplace le texte du captcha
         retryButton.style.display = 'inline-block';  // Affiche le bouton pour recommencer
         gameCanvas.style.display = 'none';  // Cache le canvas
+        setTimeout(() => {
+          handleGame();
+        }, 2000);
         return;
       }
 

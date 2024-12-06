@@ -56,14 +56,14 @@ export default function app() {
       <Waste />
       <div
           onClick={() => handleGame()}
-          className="absolute top-[20] left-[360px] w-11 h-11 cursor-pointer hover:scale-150 hover:-rotate-6 transform transition-all duration-300 ease-in-out"
+          className="absolute top-[2000] left-[360px] w-48 h-48 cursor-pointer hover:scale-110 hover:-rotate-3 transform transition-all duration-300 ease-in-out"
           title="Cœur"
         >
           <Image
-            src="/images/PixelFish.png"
+            src="/images/cookie.png"
             alt="fish"
-            width={40}
-            height={40}
+            width={200}
+            height={200}
             className="cursor-pointer"
           />
         </div>

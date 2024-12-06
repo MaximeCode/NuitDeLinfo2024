@@ -7,7 +7,7 @@ import Link from "next/link"
 export default function Survey() {
   const [count, setCount] = useState(0) // Nb of questions answered
   const [quiz, setquiz] = useState<QuizType>(questions[count]) // Current question
-  const [selectedOption, setSelectedOption] = useState<number | null>(null) // Answer selected
+  const [selectedOption, setSelectedOption] = useState<number>(4) // Answer selected
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null) // Answer validation
   const [incorrectAnswers, setIncorrectAnswers] = useState<number[]>([]) // Incorrect answers
 
@@ -83,7 +83,7 @@ export default function Survey() {
               onClick={() => {
                 setCount(count + 1)
                 setquiz(questions[count + 1])
-                setSelectedOption(null)
+                setSelectedOption(4)
                 setIsCorrect(null)
                 setIncorrectAnswers([])
               }}>
