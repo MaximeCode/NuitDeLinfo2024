@@ -24,7 +24,7 @@ const CaptchaGame: React.FC = () => {
     }
 
     const fishImage = new Image();
-    fishImage.src = '/images/PixelFish.png';
+    fishImage.src = '/images/OceanFish.png';
 
     // Initialisation des variables du jeu
     const fish = { x: 100, y: 300, width: 50, height: 30, speed: 0, gravity: 0.5, jump: -10 };
