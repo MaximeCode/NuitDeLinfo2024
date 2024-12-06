@@ -82,7 +82,7 @@ export default function CreditPage() {
       console.log('Réponse de l\'API GitHub:', data);
 
       if (Array.isArray(data)) {
-        for (let contributor of contributors) {
+        for (const contributor of contributors) {
           const contributorData = data.find(user => user.login === contributor.github);
           result[contributor.github as keyof ContributionCounts] = contributorData ? contributorData.contributions : 0;
         }
@@ -187,7 +187,7 @@ export default function CreditPage() {
 
       {/* Footer */}
       <footer className="p-6 bg-gradient-to-r from-indigo-600 to-sky-500 text-white text-center">
-        © 2024, Projet de l'équipe
+         2024, Projet de l&apos;équipe
       </footer>
     </div>
   );

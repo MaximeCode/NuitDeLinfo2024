@@ -9,7 +9,6 @@ import FishDead from "../components/FishDead"
 import Image from 'next/image';
 
 export default function App() {
-  const [background, setBackground] = useState('rgba(0, 122, 255, 1)'); // Bleu initial
   const [scrollPosition, setScrollPosition] = useState(0);
   const router = useRouter(); // Initialiser le routeur
 
@@ -25,12 +24,6 @@ export default function App() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercentage = scrollY / pageHeight;
-
-      // Mettre à jour la couleur de fond
-      const blueValue = Math.max(255 - scrollY / 3, 50); // Limiter la valeur de bleu
-      setBackground(`rgba(0, 0, ${blueValue}, 1)`); // Utilisation du bleu pur sans vert
 
       // Mettre à jour la position de l'ancre avec le facteur de ralentissement
       setScrollPosition(scrollY * anchorScrollFactor); // Appliquer le facteur de ralentissement

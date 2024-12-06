@@ -32,7 +32,7 @@ const CaptchaGame: React.FC = () => {
     let isGameOver = false;
     let passedPipes = 0; // Nombre de tuyaux passés
     let gameTime = 0; // Temps écoulé en secondes
-    let pipeInterval = 1500; // Intervalle en ms entre les tuyaux
+    const pipeInterval = 1500; // Intervalle en ms entre les tuyaux
     let timerInterval: NodeJS.Timeout;
     let isGameWon = false;
 
@@ -91,7 +91,7 @@ const CaptchaGame: React.FC = () => {
 
     const checkCollisions = () => {
       // Vérifie les collisions entre le poisson et les tuyaux
-      for (let pipe of pipes) {
+      for (const pipe of pipes) {
         if (fish.x + fish.width > pipe.x && fish.x < pipe.x + pipe.width) {
           if (fish.y < pipe.topY || fish.y + fish.height > pipe.bottomY) {
             isGameOver = true;
@@ -188,7 +188,7 @@ const CaptchaGame: React.FC = () => {
       <div id="captcha-container" className="flex flex-col items-center justify-center bg-white p-6 rounded-lg shadow-lg w-[350px] h-[250px] relative">
         <label id="captchaText" className="text-center mb-4">
           <input type="checkbox" id="checkbox" className="mr-2" />
-          Survivez 5 secondes ou passez 2 tuyaux pour <strong>prouver que vous n'êtes pas un robot</strong>
+          Survivez 5 secondes ou passez 2 tuyaux pour <strong>prouver que vous n&apos;êtes pas un robot</strong>
         </label>
         <canvas id="gameCanvas" width="400" height="600" className="border bg-gradient-to-b from-blue-400 to-blue-600 hidden mb-4"></canvas>
 

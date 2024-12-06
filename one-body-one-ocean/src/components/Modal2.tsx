@@ -8,18 +8,13 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const Modal2 = ({ title, content, list = [], onClose }: ModalProps) => {
+const Modal2 = ({ title, content, list = [] }: ModalProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     // Lorsqu'une modal est ouverte, on l'affiche avec une animation.
     setIsVisible(true);
   }, []);
-
-  const closeModal = () => {
-    setIsVisible(false);
-    setTimeout(onClose, 300); // Attendre la fin de l'animation avant de fermer
-  };
 
   return (
     <>

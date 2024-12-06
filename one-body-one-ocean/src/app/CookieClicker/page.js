@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import './style.css'; // Assurez-vous que le chemin est correct
-import { increaseCookies, purchaseUpgrade, handleFishEvents } from './cookieFunction'; // Importez vos fonctions
+import { increaseCookies, handleFishEvents } from './cookieFunction'; // Importez vos fonctions
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { checkAdPopup } from './adPopup';
@@ -21,7 +21,6 @@ export default function FishClicker() {
   const [fishSize, setFishSize] = useState(256); // Taille du poisson
   const [spin, setSpin] = useState(false); // État pour l'animation
   const [fishJump, setFishJump] = useState(false); // État pour le saut du poisson
-  const [clickUpgradesPurchased, setClickUpgradesPurchased] = useState(0);
   const [isFishDead, setIsFishDead] = useState(false);
   const [upgradeCount, setUpgradeCount] = useState(0); // Ajout de l'état upgradeCount
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -46,19 +45,19 @@ export default function FishClicker() {
 const handleClick = (event) => {
   // Utilise setFishCount pour incrémenter fishCount
   setFishCount((prevCount) => {
-      const newCount = prevCount + 1;
-      checkAdPopup(newCount); // Passe le nouveau count à checkAdPopup
-      return newCount; // Retourne le nouveau count
+      fishCount = prevCount + 1;
+      checkAdPopup(fishCount); // Passe le nouveau count à checkAdPopup
+      return fishCount; // Retourne le nouveau count
   });
 
   if (isClickInsideFish(event.clientX, event.clientY)) {
       increaseCookies(cookies, setCookies, clickMultiplier);
 
       setClickCount((prevCount) => {
-          const newCount = prevCount + 1;
+          clickCount = prevCount + 1;
 
           // Vérifiez si le compteur de clics a atteint 5
-          if (newCount >= 5) {
+          if (clickCount >= 5) {
               moveFishAwayFromMouse(event.clientX, event.clientY, true);
               setFishJump(true); // Indique que le poisson doit sauter
               setTimeout(() => setFishJump(false), 300); // Réinitialise après 0.3 secondes
@@ -74,7 +73,7 @@ const handleClick = (event) => {
           }, 1000);
           setClickTimeout(timeoutId);
 
-          return newCount;
+          return clickCount;
       });
   }
 };
@@ -87,15 +86,15 @@ const handleClickUpgrade = () => {
   if (cookies >= clickUpgradeCost) {
     setCookies(cookies - clickUpgradeCost);
     setUpgradeCount(prevCount => {
-      const newCount = prevCount + 1;
+      upgradeCount = prevCount + 1;
 
       // Vérifiez si le poisson est mort
-      if (newCount === 22) {
+      if (upgradeCount === 22) {
         setIsFishDead(true);
-        return newCount;
+        return upgradeCount;
       }
 
-      return newCount;
+      return upgradeCount;
     });
 
     // Définit le multiplicateur de clics à partir du tableau
@@ -302,8 +301,6 @@ const getBackgroundColor = () => {
       return { left: newLeft, top: newTop };
     });
   };
-  const backgroundColor = getBackgroundColor();
-
 
   // Rendu principal
   return (
@@ -316,7 +313,7 @@ const getBackgroundColor = () => {
             className="relative inline-block px-8 py-4 font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 rounded-full shadow-lg hover:from-indigo-600 hover:to-sky-500 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition duration-300 ease-in-out"
           >
             <span className="absolute inset-0 transition-transform duration-300 transform -translate-x-1 -translate-y-1 bg-indigo-700 rounded-full hover:translate-x-0 hover:translate-y-0"></span>
-            <span className="relative">Page d'accueil</span>
+            <span className="relative">Page d&apos;accueil</span>
           </div>
         </Link>
       </div>
@@ -421,7 +418,7 @@ const getBackgroundColor = () => {
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-75">
           <div className="bg-red-600 text-white p-5 rounded">
             <h2 className="text-2xl font-bold">Le poisson est mort !</h2>
-            <p>Vous l'avez tellement nourrie que vous avez pollué son environnement. Le poisson ne peut plus vivre dans cette pollution.</p>
+            <p>Vous l&apos;avez tellement nourrie que vous avez pollué son environnement. Le poisson ne peut plus vivre dans cette pollution.</p>
             <button 
               className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
               onClick={() => setIsFishDead(false)} // Pour fermer le message
@@ -443,9 +440,9 @@ const getBackgroundColor = () => {
             <h2 className="text-xl font-bold mb-4">Règles du jeu</h2>
             <ul className="list-disc pl-5">
               <li>Cliquez sur le poisson pour en gagner.</li>
-              <li>Achetez des pêcheurs pour qu'ils pêchent pour vous.</li>
+              <li>Achetez des pêcheurs pour qu&apos;ils pêchent pour vous.</li>
               <li>Nourrissez le poisson pour en gagner plus à chaque fois</li>
-              <li>Cette nourriture n'est peut-être pas très bonne pour le poisson...</li>
+              <li>Cette nourriture n&apos;est peut-être pas très bonne pour le poisson...</li>
             </ul>
             <button
               onClick={() => setShowRules(false)}
