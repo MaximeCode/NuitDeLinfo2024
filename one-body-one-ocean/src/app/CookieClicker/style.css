@@ -1,0 +1,21 @@
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .fish {
+    transition: transform 0.5s;
+  }
+  
+  .spin {
+    animation: spin 0.5s linear forwards;
+  }
+
+  .disabled-button {
+    text-decoration: line-through;
+    color: red; /* Couleur du texte barré */
+  }
