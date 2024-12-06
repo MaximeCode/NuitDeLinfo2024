@@ -19,3 +19,49 @@
     text-decoration: line-through;
     color: red; /* Couleur du texte barré */
   }
+
+  .popup-content {
+    position: relative;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .adPopup {
+    background-color: '#003366';
+    color: white; /* Couleur du texte en blanc */
+    padding: 20px; /* Ajout de remplissage */
+    border-radius: 10px; /* Coins arrondis */
+    text-align: center; /* Centrer le texte */
+    position: fixed; /* Pour le positionnement sur l'écran */
+    top: 50%; /* Centrer verticalement */
+    left: 50%; /* Centrer horizontalement */
+    transform: translate(-50%, -50%); /* Ajuster la position */
+    width: 70%;
+    height: 70%;
+    z-index: 1000; /* Pour être au-dessus d'autres éléments */
+  }
+
+  .ad-text {
+    font-size: 20px; /* Taille de police plus grande */
+    color: black; /* Couleur du texte */
+    margin-top: 20px; /* Espacement au-dessus du texte */
+    position: absolute; /* Pour positionner le texte */
+    bottom: 20px; /* Positionner le texte vers le bas */
+    left: 50%; /* Centrer le texte horizontalement */
+    transform: translateX(-50%); /* Ajuster pour centrer */
+}
+
+.ad-popup-image {
+    display: block; /* Pour centrer l'image */
+    margin: 0 auto; /* Centrer l'image */
+    width: 70%; /* Ajuster la taille de l'image selon vos besoins */
+    max-width: 300px; /* Limiter la taille maximale de l'image */
+    height: auto; /* Conserver le ratio d'aspect */
+}
+

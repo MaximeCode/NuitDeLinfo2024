@@ -31,7 +31,7 @@ export default function Survey() {
   return (
     <>
       <div className="space-y-12">
-        {count <= questions.length ? (
+        {count < questions.length ? (
           <div className="space-y-12">
             <div className="space-y-4">
               <h2 className="text-2xl text-center">
@@ -59,11 +59,10 @@ export default function Survey() {
             <div className="text-center text-2xl">
               Bravo, vous avez terminé le quiz !
             </div>
-            <Link href="/">Retour à l&apos;accueil</Link>
           </>
         )}
 
-        {isCorrect !== true && (
+        {selectedOption !== 4 && (
           <div
             className={`w-max mx-auto p-4 text-center text-xl rounded-md transition-all duration-300 ease-in-out border-2 border-green-500 hover:bg-green-500 bg-transparent cursor-pointer ${
               selectedOption || selectedOption == 0 ? "block" : "hidden"
@@ -81,13 +80,16 @@ export default function Survey() {
             <div
               className="flex justify-center items-center gap-4 w-max mx-auto p-4 text-xl rounded-md transition-all duration-300 ease-in-out border-2 border-blue-700 hover:bg-blue-500 bg-transparent cursor-pointer"
               onClick={() => {
-                setCount(count + 1)
-                setquiz(questions[count + 1])
                 setSelectedOption(4)
                 setIsCorrect(null)
                 setIncorrectAnswers([])
+                setCount(count + 1)
+                setquiz(questions[count + 1])
               }}>
-              Question suivante
+              {count < questions.length - 1
+                ? "Question suivante"
+                : "Terminer le quiz"}
+
               <svg
                 className="w-8 h-8"
                 aria-hidden="true"
@@ -112,7 +114,8 @@ export default function Survey() {
         ) : null}
       </div>
 
-      <div className="absolute top-10 left-10 flex items-center justify-center rounded-md p-3 border border-sky-500 hover:bg-sky-500 hover:text-white transition-all duration-200 ease-in-out cursor-pointer">
+      {/* Back to home fixed */}
+      <div className="absolute top-10 left-10 flex items-center justify-center rounded-md p-3 border border-sky-600 hover:bg-sky-600 hover:text-white transition-all duration-200 ease-in-out cursor-pointer">
         <svg
           className="w-8 h-8"
           aria-hidden="true"
