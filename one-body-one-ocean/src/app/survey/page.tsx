@@ -1,3 +1,4 @@
+"use client"
 import React, { useState } from "react"
 import { QuizType } from "../../types/quizType"
 import questions from "../data/questions.json"
