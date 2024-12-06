@@ -1,0 +1,262 @@
+[
+  {
+    "id": 1,
+    "question": "À quel mécanisme océanique le système circulatoire humain est-il souvent comparé ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "Les courants océaniques",
+        "isCorrect": true
+      },
+      {
+        "id": 1,
+        "answer": "Les marées",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Les zones de haute pression",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "La chaîne alimentaire",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "Quel organe humain est comparable aux récifs coralliens pour leur rôle de protection et d'habitat ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "Les poumons",
+        "isCorrect": false
+      },
+      {
+        "id": 1,
+        "answer": "Le foie",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Les reins",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "La peau",
+        "isCorrect": true
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "Quel rôle joue le système respiratoire humain dans l'équilibre océanique ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "Favoriser l'échange de gaz",
+        "isCorrect": true
+      },
+      {
+        "id": 1,
+        "answer": "Produire des nutriments",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Maintenir la biodiversité",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Réguler la salinité",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Quel est l'équivalent des reins humains dans l'écosystème océanique ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "Les estuaires",
+        "isCorrect": true
+      },
+      {
+        "id": 1,
+        "answer": "Les poissons migrateurs",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Les coraux",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Les abysses",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Les vagues océaniques sont souvent associées à quel processus humain ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "Le sommeil",
+        "isCorrect": false
+      },
+      {
+        "id": 1,
+        "answer": "La respiration",
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "answer": "La circulation sanguine",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "La digestion",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Quel mécanisme océanique reflète le rôle des intestins humains ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "Les zones abyssales",
+        "isCorrect": false
+      },
+      {
+        "id": 1,
+        "answer": "Les zones de désoxygénation",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Les courants thermohalins",
+        "isCorrect": true
+      },
+      {
+        "id": 3,
+        "answer": "Les marées",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Les poumons humains et les océans partagent quel rôle essentiel ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "La filtration des polluants",
+        "isCorrect": false
+      },
+      {
+        "id": 1,
+        "answer": "La régulation de la température",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "La production d'oxygène",
+        "isCorrect": true
+      },
+      {
+        "id": 3,
+        "answer": "La photosynthèse",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Comment la peau humaine reflète-t-elle un aspect des océans ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "En contrôlant les courants",
+        "isCorrect": false
+      },
+      {
+        "id": 1,
+        "answer": "En produisant de l'énergie",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "En servant de barrière protectrice",
+        "isCorrect": true
+      },
+      {
+        "id": 3,
+        "answer": "En stockant des nutriments",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Quel mécanisme océanique est analogue au système nerveux humain ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "Les zones de pêches",
+        "isCorrect": false
+      },
+      {
+        "id": 1,
+        "answer": "Les chaînes alimentaires",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Les signaux des courants marins",
+        "isCorrect": true
+      },
+      {
+        "id": 3,
+        "answer": "La photosynthèse",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Quel système humain est comparable à la biodiversité marine dans son rôle global ?",
+    "answers": [
+      {
+        "id": 0,
+        "answer": "Le système endocrinien",
+        "isCorrect": false
+      },
+      {
+        "id": 1,
+        "answer": "Le système immunitaire",
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "answer": "Le système digestif",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Le système musculaire",
+        "isCorrect": false
+      }
+    ]
+  }
+]
