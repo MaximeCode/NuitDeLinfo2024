@@ -79,7 +79,7 @@ export default function Survey() {
               Bonne réponse !
             </div>
             <div
-              className="flex justify-center items-center gap-4 w-max mx-auto p-4 text-xl rounded-md transition-all duration-300 ease-in-out border-2 border-blue-500 hover:bg-blue-500 bg-transparent cursor-pointer"
+              className="flex justify-center items-center gap-4 w-max mx-auto p-4 text-xl rounded-md transition-all duration-300 ease-in-out border-2 border-blue-700 hover:bg-blue-500 bg-transparent cursor-pointer"
               onClick={() => {
                 setCount(count + 1)
                 setquiz(questions[count + 1])

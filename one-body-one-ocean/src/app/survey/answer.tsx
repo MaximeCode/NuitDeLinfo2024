@@ -24,18 +24,18 @@ export default function Answer({
   return (
     <div
       onClick={onClick}
-      className={`p-4 text-center text-xl rounded-md border-2 transition-all duration-300 ease-in-out cursor-pointer
+      className={`p-4 text-center text-xl rounded-md border-4 transition-all duration-300 ease-in-out cursor-pointer
       ${isSelected ? "font-bold" : ""}
       ${isCorrect ? "border-green-500" : ""}
       ${isIncorrect ? "border-red-500" : ""}
-      ${isSelected && !isCorrect && !isIncorrect ? "border-sky-500" : ""}
+      ${isSelected && !isCorrect && !isIncorrect ? "border-sky-900" : ""}
       ${
         !isSelected &&
         !isIncorrect &&
         !isCorrect &&
         "bg-transparent border-transparent"
       }
-      ${!isSelected && "hover:border-sky-500"}`}>
+      ${!isSelected && "hover:border-sky-700"}`}>
       {text}
     </div>
   )

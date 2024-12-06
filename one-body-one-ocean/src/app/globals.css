@@ -67,7 +67,7 @@
   position: absolute;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.6);
-  animation: float 10s infinite;
+  animation: float 50s infinite;
   pointer-events: none;
 }
 
@@ -75,7 +75,7 @@
   width: 80px;
   height: 80px;
   left: 15%;
-  animation-duration: 14s;
+  animation-duration: 140s;
   animation-delay: 2s;
 }
 
@@ -83,15 +83,15 @@
   width: 50px;
   height: 50px;
   left: 30%;
-  animation-duration: 12s;
-  animation-delay: 1s;
+  animation-duration: 120s;
+  animation-delay: 2s;
 }
 
 .bubbles div:nth-child(3) {
   width: 90px;
   height: 90px;
   left: 45%;
-  animation-duration: 16s;
+  animation-duration: 160s;
   animation-delay: 3s;
 }
 
@@ -99,6 +99,6 @@
   width: 40px;
   height: 40px;
   left: 70%;
-  animation-duration: 18s;
+  animation-duration: 180s;
   animation-delay: 5s;
 }

@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Modal1 from './Modal1';
@@ -11,6 +12,11 @@ const HumanBodyNavbar = () => {
     coeur: false,
     blodd: false,
   });
+  const router = useRouter(); // Initialiser le routeur
+
+  const handleQuizz = () => {
+    router.push('/quiz'); // Rediriger vers /quiz
+  };
 
   // Ouvrir les 3 modals pour un élément du corps humain
   const openModals = (modalName: string) => {
@@ -83,6 +89,7 @@ const HumanBodyNavbar = () => {
           />
         </div>
         <div
+          onClick={() => handleQuizz()}
           className="absolute top-[20] left-[360px] w-11 h-11 cursor-pointer hover:scale-150 hover:-rotate-6 transform transition-all duration-300 ease-in-out"
           title="Cœur"
         >
