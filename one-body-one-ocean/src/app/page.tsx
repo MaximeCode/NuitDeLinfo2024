@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import HumanBodyNavbar from "../components/Navbar";
 import Wreck from "../components/Wreck";
@@ -15,8 +16,8 @@ export default function app() {
   const handleGame = () => {
     router.push('/captcha-game'); // Rediriger vers /quiz
   };
-  const handleCredit = () => {
-    router.push('/credits'); // Rediriger vers /quiz
+  const handleCredits = () => {
+    router.push('/credits'); // Rediriger vers /credits
   };
 
   const anchorScrollFactor = 0.33; // Facteur de ralentissement de l'ancre (ajuster ce nombre pour ralentir ou accélérer)
@@ -72,12 +73,15 @@ export default function app() {
         </div>
       <FishDead />
       <div className="flex justify-center items-center mt-10">
-          <div onClick={() => handleCredit()}
+        <Link href="/credits">
+          <div
+          onClick={() => handleCredits()}
             className="relative inline-block px-8 py-4 font-bold text-white bg-gradient-to-r from-sky-500 to-indigo-600 rounded-full shadow-lg hover:from-indigo-600 hover:to-sky-500 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition duration-300 ease-in-out"
           >
             <span className="absolute inset-0 transition-transform duration-300 transform -translate-x-1 -translate-y-1 bg-indigo-700 rounded-full hover:translate-x-0 hover:translate-y-0"></span>
             <span className="relative">Voir les crédits</span>
           </div>
+        </Link>
       </div>
       {/* Conteneur de l'ancre et de la chaîne */}
       <div
